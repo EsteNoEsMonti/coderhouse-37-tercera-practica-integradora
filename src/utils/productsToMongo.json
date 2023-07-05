@@ -1,0 +1,72 @@
+[
+  {
+    "id": "628bac46-2192-4907-86e7-369c4d2b3d5c",
+    "title": "Test Product 54 😀",
+    "description": "This is a generic description",
+    "code": "PRODUCT-4ac4eeed-739c-4cff-ba76-b447fa06cc9a",
+    "price": 568,
+    "status": true,
+    "stock": 18,
+    "category": "Category 3"
+  },
+  {
+    "id": "06a6de5f-4ac5-43f0-91c0-5cef7548e272",
+    "title": "Test Product 42 😀",
+    "description": "This is a generic description",
+    "code": "PRODUCT-e2e0e535-54bd-497f-a72a-321fa14a9978",
+    "price": 379,
+    "status": true,
+    "stock": 26,
+    "category": "Category 2"
+  },
+  {
+    "id": "c9abe39d-2da1-4f72-9ce7-b3fdfea70545",
+    "title": "Test Product 60 🚀",
+    "description": "This is a generic description",
+    "code": "PRODUCT-8f08613f-aa43-4892-bccb-dfa1d0404f35",
+    "price": 437,
+    "status": true,
+    "stock": 30,
+    "category": "Category 3"
+  },
+  {
+    "id": "1c6f58ce-c87a-4e50-a6f5-3423f8913979",
+    "title": "Test Product 19 🎉",
+    "description": "This is a generic description",
+    "code": "PRODUCT-792d1cbf-d51a-4e52-b3dc-33047d2ccb9d",
+    "price": 470,
+    "status": true,
+    "stock": 29,
+    "category": "Category 2"
+  },
+  {
+    "id": "0c4cd69a-7c6d-4aad-b2be-aed67c1c9b45",
+    "title": "Test Product 43 🚀",
+    "description": "This is a generic description",
+    "code": "PRODUCT-39e01bae-3d43-411f-883e-c8bb0103789c",
+    "price": 266,
+    "status": true,
+    "stock": 12,
+    "category": "Category 3"
+  },
+  {
+    "id": "d43cdb89-bdfb-4301-8c89-ce567fd976c0",
+    "title": "Test Product 3 🚀",
+    "description": "This is a generic description",
+    "code": "PRODUCT-cd07a671-7007-4bdc-8c63-6d40b732b8f5",
+    "price": 288,
+    "status": true,
+    "stock": 27,
+    "category": "Category 3"
+  },
+  {
+    "id": "184fdffa-ff0b-4332-939e-0eb0be6832d8",
+    "title": "Test Product 12 😄",
+    "description": "This is a generic description",
+    "code": "PRODUCT-72ab1402-e02b-4aec-ae2b-710ada7fccec",
+    "price": 327,
+    "status": true,
+    "stock": 26,
+    "category": "Category 3"
+  }
+]
