@@ -1,11 +1,11 @@
 import { socketFn } from "../../../mid/soketio.rt.js";
-import { productsRepository } from "../../../repositories/product.repository.js";
+import { productsRepository } from "../../../repositories/product.repositorie.js";
 
 export async function updateProduct(req, res, next) {
+  req.logger.http("inside put products");
   let upd;
   try {
     upd = { ...req.body };
-    console.log(upd);
   } catch (error) {
     return next(error);
   }
@@ -14,6 +14,7 @@ export async function updateProduct(req, res, next) {
     await socketFn();
     res.json(actualizada);
   } catch (error) {
+    req.logger.error(`put product fail ${error.message}`);
     next(error);
   }
 }

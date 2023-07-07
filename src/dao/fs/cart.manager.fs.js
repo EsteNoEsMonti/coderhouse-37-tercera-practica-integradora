@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import { ErrorNotFound } from "../../mid/errors.class";
 
 export default class cartsManager {
   #path;
@@ -27,7 +28,7 @@ export default class cartsManager {
     await this.#loadCarts();
     const finder = this.carts.find((c) => c.id === id);
     if (!finder) {
-      throw new Error("Not Found");
+      throw new ErrorNotFound("Cart Not Found");
     }
     return finder.products;
   }

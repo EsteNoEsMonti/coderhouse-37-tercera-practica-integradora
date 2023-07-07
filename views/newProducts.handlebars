@@ -14,6 +14,7 @@
   <div id="buttoner">
     <label for="code-input">Code</label>
     <input type="text" id="id-data" />
+    <input type="hidden" id="owner" value="{{profile}}" />
     <input
       type="text"
       id="code-input"
@@ -21,22 +22,25 @@
       {{!-- required --}}
     />
     {{!-- <button
+      class="btncrud sercher"
       id="sercher-btn"
-      onclick="SerchProduct(document.getElementById('code-input').value)"
+      onclick="SerchProduct(document.getElementById('code-input').value,document.getElementById('owner').value)"
       type="button"
-    ><i></i></button> --}}
-    {{!-- <button
+    ><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button
+      class="btncrud deleter"
       id="deleter-btn"
       disabled
-      onclick="delProduct(document.getElementById('id-data').value)"
+      onclick="delProduct(document.getElementById('id-data').value,document.getElementById('owner').value)"
       type="button"
-    ><i></i></button>
+    ><i class="fa-solid fa-trash"></i></button>
     <button
+      class="btncrud updater"
       id="updater-btn"
       disabled
-      onclick="updProduct()"
+      onclick="updProduct(document.getElementById('owner').value)"
       type="button"
-    ><i></i></button> --}}
+    ><i class="fa-solid fa-pen-to-square"></i></button> --}}
 
   </div>
   <div>

@@ -1,6 +1,6 @@
 import { io } from "../app/server.js";
-import { mmg } from "../dao/mongoose/messages.manager.mg.js";
-import Messages from "../models/Messages.model.js";
+import { mmg } from "../dao/mongoose/messages.dao.mg.js";
+import Messages from "../models/entities/Messages.model.js";
 
 export async function socketChat(clientSocket) {
   clientSocket.on("nuevoMensaje", async (mensaje) => {

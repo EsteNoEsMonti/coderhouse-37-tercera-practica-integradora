@@ -1,3 +1,5 @@
+// import { winLogger } from "../../src/utils/logger";
+
 const formRegister = document.querySelector("#formRegister");
 
 if (formRegister instanceof HTMLFormElement) {
@@ -48,7 +50,7 @@ if (formRegister instanceof HTMLFormElement) {
           title: `Authentication Failed`,
           icon: "error"
         });
-        console.log("[login] estado inesperado: " + status);
+        // winLogger.error("[login] estado inesperado: " + status);
       }
     }
   });

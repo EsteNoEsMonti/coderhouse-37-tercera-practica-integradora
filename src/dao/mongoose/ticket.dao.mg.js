@@ -1,13 +1,16 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from "mongoose";
 import { DaoMongoose } from "./defaultDaoMongoose.js";
 
-const TicketsSchema = new mongoose.Schema({
-  code: { type: String, required: true, unique: true },
-  purchase_datetime: { type: String, required: true },
-  amount: { type: Number, required: true },
-  purchaser: { type: String, required: true }
-}, { versionKey: false })
-const ticketsModel = mongoose.model('tickets', TicketsSchema)
+export const SchemaTickets = new mongoose.Schema(
+  {
+    code: { type: String, require: true, unique: true },
+    puchase_datetime: { type: String, require: true },
+    amount: { type: Number, require: true, min: 0 },
+    purcheaser: { type: String, required: true },
+  },
+  { versionKey: false }
+);
 
-// export const ticketsDaoMongoose = new DaoMongoose(ticketsModel)
-export const tmg = new DaoMongoose(ticketsModel)
+const ticketModel = mongoose.model("tickets", SchemaTickets);
+
+export const tmg = new DaoMongoose(ticketModel);

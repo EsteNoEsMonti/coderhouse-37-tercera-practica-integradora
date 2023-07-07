@@ -1,54 +1,52 @@
+import { NODE_ENV } from "../config/config.js";
+import winston from "winston";
 
-import { ENV } from '../config/config.js'
-import winston from 'winston'
-
-// const levelsWinston = {
-//     error: 0,
-//     warn: 1,
-//     info: 2,
-//     http: 3,
-//     verbose: 4,
-//     debug: 5,
-//     silly: 6
+// solo a modo de referencia por si se decide trabajar con los que vienen por defecto
+// levelsWinston {
+//   error: 0,
+//   warn: 1,
+//   info: 2,
+//   http: 3,
+//   verbose: 4,
+//   debug: 5,
+//   silly: 6,
 // }
-const levelsWinston = {
+
+const myOwnLevels = {
   fatal: 0,
   error: 1,
   warning: 2,
   info: 3,
   http: 4,
-  debug: 5
-}
+  verbose: 5,
+  debug: 6,
+};
 
-const winstonLoggerDev = winston.createLogger({
-  levels: levelsWinston,
+const loggerDev = winston.createLogger({
+  levels: myOwnLevels,
   transports: [
     new winston.transports.Console({
       level: "debug",
     }),
-    new winston.transports.File({
-      level: "error",
-      filename: 'development.log'
-    })
-  ]
-})
+  ],
+});
 
-const winstonLoggerProd = winston.createLogger({
-  levels: levelsWinston,
+const loggerProd = winston.createLogger({
+  levels: myOwnLevels,
   transports: [
     new winston.transports.File({
-      level: "http",
-      filename: 'production.log'
+      level: "error",
+      filename: "error.log",
     }),
     new winston.transports.Console({
-      level: "info"
-    })
-  ]
-})
+      level: "info",
+    }),
+  ],
+});
 
-export let winstonLogger
-if (ENV === 'production') {
-  winstonLogger = winstonLoggerProd
+export let winLogger;
+if (NODE_ENV === "production") {
+  winLogger = loggerProd;
 } else {
-  winstonLogger = winstonLoggerDev
+  winLogger = loggerDev;
 }

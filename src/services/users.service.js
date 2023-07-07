@@ -1,6 +1,6 @@
-import { cartRepository } from "../repositories/cart.repository.js";
-import Users from "../models/Users.model.js";
-import Carts from "../models/carts.model.js";
+import { cartRepository } from "../repositories/cart.repositrie.js";
+import Users from "../models/entities/Users.model.js";
+import Carts from "../models/entities/carts.model.js";
 import { userRepository } from "../repositories/users.repository.js";
 
 class UserService {
@@ -19,8 +19,12 @@ class UserService {
         age: Number(UserData.age),
         password: UserData.password,
         role:
-          UserData.email === "adminCoder@coder.com" && UserData.password === "adminCod3r123" ? "admin"
-            : UserData.email === "lucas@lucas.com" && UserData.password === "lucas" ? "admin"
+          UserData.email === "adminCoder@coder.com" &&
+          UserData.password === "adminCod3r123"
+            ? "admin"
+            : UserData.email === "lucas@lucas.com" &&
+              UserData.password === "lucas"
+            ? "super-admin"
             : "user",
         cart: UserData.cart,
       };

@@ -1,7 +1,8 @@
+
 <header>
   {{#if user}}
   <h3>Welcome {{user.name}}! [role: {{user.role}}] [cart: {{user.cart}}]</h3>
-  {{/if}}
+      {{/if}}
   <nav>
     <ul id="lista">
       <li><a href="/newproducts" id="addref">create new product</a></li>
@@ -15,48 +16,47 @@
 
 {{#if listExist}}
 <div>
-  {{#each list.payload}}
+      {{#each list.payload}}
   <div>
-    <h2>{{this.title}}</h2>
-    <p>Categoría: {{this.category}}</p>
+      <h2>{{this.title}}</h2>
+      <p>Categoría: {{this.category}}</p>
     <p>Code:{{this.code}}</p>
-    <p>Descripción: {{this.description}}</p>
-    <p>Precio: {{this.price}}</p>
-    <p>Stock: {{this.stock}}</p>
+      <p>Descripción: {{this.description}}</p>
+      <p>Precio: {{this.price}}</p>
+      <p>Stock: {{this.stock}}</p>
     <p>See detail product: <a href="http://localhost:8080/api/products/{{this.id}}">see detail</a></p>
-    <input type="number" min="1" max="{{this.stock}}" value="1" id="quantity-{{this.code}}">
+      <input type="number" min="1" max="{{this.stock}}" value="1" id="quantity-{{this.code}}">
     <button type="button"
-      onclick="addProductQuantityToCart(document.getElementById('cartref').href,this.dataset.productid,document.getElementById('quantity-{{this.code}}').value)"
+                onclick="addProductQuantityToCart(document.getElementById('cartref').href,this.dataset.productid,document.getElementById('quantity-{{this.code}}').value)"
       data-productid={{this.id}} /> add to cart
-    </button>
+              </button>
+    </div>
+      {{/each}}
   </div>
-  {{/each}}
-</div>
 {{else}}
 <p>the product gallery is empty</p>
 {{/if}}
 
 <nav aria-label="Page navigation">
   <ul>
-    {{#if list.hasPrevPage}}
+  {{#if list.hasPrevPage}}
     <li>
-      {{else}}
+    {{else}}
     <li>
-      {{/if}}
+  {{/if}}
       <a href={{list.prevLink}}>Prev Page</a>
     </li>
-    {{#if list.hasNextPage}}
+  {{#if list.hasNextPage}}
     <li>
-      {{else}}
+    {{else}}
     <li>
-      {{/if}}
+  {{/if}}
       <a href={{list.nextLink}}>Next Page</a>
     </li>
   </ul>
 </nav>
-
 <footer>
-  <div>
+    <div>
     {{#if chat}}
     <div id="chat">
       <a href="/chat">Chat here</a>

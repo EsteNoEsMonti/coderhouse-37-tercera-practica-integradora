@@ -2,16 +2,18 @@ import { Router } from "express";
 import {
   cartView,
   chatView,
+  forgotView,
   loginView,
   newProductView,
   productView,
+  recoverView,
   regisView,
-  ticketView
+  ticketView,
 } from "../../controllers/views/controller.all.views.js";
 import { authJwtView } from "../../mid/authentication.js";
 import { soloRol } from "../../mid/authorization.js";
-import { getMockingProducts, getMockingProductsWithFakerJS } from "../../controllers/api/products/controller.getall.products.js";
-import { loggerController } from "../../controllers/views/controller.logger.js";
+import { PATH_CHAT } from "../../config/config.js";
+import { mmg } from "../../dao/mongoose/messages.dao.mg.js";
 
 export const viewsRouter = Router();
 
@@ -28,21 +30,23 @@ viewsRouter.get("/products", authJwtView, productView);
 //vista de carritos
 viewsRouter.get("/carts/:cid", authJwtView, cartView);
 
-// vista de carritos
-viewsRouter.get("/carts/:cid/purchase", authJwtView, ticketView);
-
-// Login
+//Login
 viewsRouter.get("/login", loginView);
 
-// Register
+//Register
 viewsRouter.get("/register", regisView);
 
-// Chat
+//Chat
 viewsRouter.get("/chat", soloRol("user"), chatView);
 
-// mocking de productos
-viewsRouter.get("/mockingproducts", getMockingProducts);
-viewsRouter.get("/mockingproductswhitfakesjs", getMockingProductsWithFakerJS);
+//Ticket
 
-// logger
-viewsRouter.get('/loggerTest', loggerController)
+viewsRouter.get("/ticket/:tid", ticketView);
+
+// Forgot password
+
+viewsRouter.get("/forgot", forgotView);
+
+//recover passwors
+
+viewsRouter.get("/recover", recoverView);

@@ -10,19 +10,16 @@ if (PERSISTENCIA === "mongoose") {
   const { pmg } = await import("./mongoose/product.dao.mg.js");
   productDao = pmg;
   const { cmg } = await import("./mongoose/cart.dao.mg.js");
-  cartDao = cmg
+  cartDao = cmg;
   const { tmg } = await import("./mongoose/ticket.dao.mg.js");
-  ticketDao = tmg
+  ticketDao = tmg;
 } else {
   const { um } = await import("./fs/users.manager.fs.js");
   userDao = um;
   const { pm } = await import("./fs/product.manager.fs.js");
   productDao = pm;
-  const { cm } = await import("./fs/cart.manager.fs.js");
-  cartDao = cm
-  // TODO: ticket con persistencia en file system
-  // const { tm } = await import("./fs/ticket.manager.fs.js");
-  // cartDao = tm
+  const { tm } = await import("./fs/ticket.manager.fs.js");
+  ticketDao = tm;
 }
 
 export { userDao, productDao, cartDao, ticketDao };

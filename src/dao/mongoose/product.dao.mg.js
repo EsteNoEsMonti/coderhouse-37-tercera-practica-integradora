@@ -15,9 +15,9 @@ export const SchemaProduts = new mongoose.Schema(
       unique: true,
       // validate: {
       //   validator: function (value) {
-      //     return value.length <= 6;
+      //     return value.length <= 7;
       //   },
-      //   message: "Code must not exceed 6 characters.",
+      //   message: "Code must not exceed 7 characters.",
       // },
     },
     stock: { type: Number, required: true, min: 0 },
@@ -27,6 +27,7 @@ export const SchemaProduts = new mongoose.Schema(
       required: true,
       enum: ["Category 1", "Category 2", "Category 3"],
     },
+    owner: { type: String, required: true, default:'super-admin' },
   },
   { versionKey: false }
 );

@@ -1,3 +1,5 @@
+// import { winLogger } from "../../src/utils/logger";
+
 const formLogin = document.getElementById("formLogin");
 
 if (formLogin instanceof HTMLFormElement) {
@@ -33,13 +35,13 @@ if (formLogin instanceof HTMLFormElement) {
           icon: "success"
         });
       } else {
-        console.log("🌙 [login] estado inesperado: " + status);
+        // winLogger.info("[login] estado inesperado: " + status);
         // @ts-ignore
         Swal.fire({
           toast: true,
           showConfirmButton: true,
           title: `Authentication Failed`,
-          icon: "error"
+          icon: "error",
         });
       }
     }

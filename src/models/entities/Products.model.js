@@ -1,4 +1,5 @@
-import { Uid } from "../utils/UiD.js";
+import { ErrorInvalidArgument } from "../error/errors.model.js";
+import { Uid } from "../../utils/UiD.js";
 
 export default class Products {
   #id;
@@ -10,52 +11,60 @@ export default class Products {
   #stock;
   #status;
   #category;
+  #owner;
 
-  constructor({ title, description, price, thumbnail, /*code,*/ stock, category }) {
+  constructor({
+    title,
+    description,
+    price,
+    thumbnail,
+    code,
+    stock,
+    category,
+    owner,
+  }) {
     this.#id = Uid();
     this.#title = title;
     this.#description = description;
     this.#price = this.validatePrice(price);
     this.#thumbnail = [this.validateThumbnail(thumbnail)];
-    // this.#code = this.validateCode(code);
-    this.#code = `PRODUCT-${Uid()}`;
+    this.#code = this.validateCode(code);
     this.#stock = this.validateStock(stock);
     this.#status = true;
-    // this.#category = this.validateCategory(category);
-    this.#category = category;
+    this.#category = this.validateCategory(category);
+    this.#owner = this.validateOwner(owner) ?? "super-admin";
   }
+
+  //validations
 
   validatePrice(price) {
     if (typeof price !== "number" || price <= 0) {
-      throw new Error("Price must be a number greater than 0.");
+      throw new ErrorInvalidArgument("Price must be a number greater than 0.");
     }
     return price;
   }
 
   validateThumbnail(thumbnail) {
     if (typeof thumbnail !== "string") {
-      throw new Error("Thumbnail must be a string ending with .jpg or .png.");
+      throw new ErrorInvalidArgument(
+        "Thumbnail must be a string ending with .jpg or .png."
+      );
     }
     return thumbnail;
   }
 
   validateCode(code) {
-    if (typeof code !== "string") {
-      throw new Error(
-        "Code must be a unique string."
+    if (typeof code !== "string" || code.length > 7) {
+      throw new ErrorInvalidArgument(
+        "Code must be a string with a maximum length of 6 characters."
       );
     }
-    // if (typeof code !== "string" || code.length > 6) {
-    //   throw new Error(
-    //     "Code must be a string with a maximum length of 6 characters."
-    //   );
-    // }
     return code;
   }
 
   validateStock(stock) {
     if (typeof stock !== "number" || stock <= 0) {
-      throw new Error("Stock must be a number greater than 0.");
+      throw new ErrorInvalidArgument("Stock must be a number greater than 0.");
     }
     return stock;
   }
@@ -70,13 +79,19 @@ export default class Products {
       "PERLITAS",
     ];
     if (!allowedCategories.includes(category)) {
-      throw new Error(
+      throw new ErrorInvalidArgument(
         "Invalid category. Allowed categories: AFA, CLUBS, +SELECCIONES, RETRO, OTROS, PERLITAS."
       );
     }
     return category;
   }
 
+  validateOwner(owner) {
+    if (typeof owner !== "string") {
+      throw new ErrorInvalidArgument("owner must be a string");
+    }
+    return owner;
+  }
   // Getters
   get id() {
     return this.#id;
@@ -114,6 +129,10 @@ export default class Products {
     return this.#category;
   }
 
+  get owner() {
+    return this.#owner;
+  }
+
   // Method to access data without exposing private fields
   dto() {
     return {
@@ -126,6 +145,7 @@ export default class Products {
       stock: this.#stock,
       status: this.#status,
       category: this.#category,
+      owner: this.#owner,
     };
   }
 }

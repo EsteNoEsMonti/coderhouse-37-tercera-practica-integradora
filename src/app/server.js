@@ -14,28 +14,31 @@ import { PORT } from "../config/config.js";
 import { COOKIE_KEY } from "../config/config.js";
 
 // mid
-import { errorFn } from "../mid/error.js";
+import { apiErrorHandler } from "../mid/error.handler.js";
 import { socketFn } from "../mid/soketio.rt.js";
 import { socketChat } from "../mid/socketio.chat.js";
+import { logger } from "../mid/loggermid.js";
 
-//DDBB
+// DDBB
 import { conectar } from "../dao/mongoose/mongoose.js";
 
 // Auth
 import session from "../mid/session.js";
 import { passportInitialize } from "../mid/authentication.js";
 
-// Logger
-import { logger } from "../mid/logger.js";
+// logger
+import { winLogger } from "../utils/logger.js";
+import winston from "winston/lib/winston/config/index.js";
 
 const app = express();
 
 await conectar();
 
-app.use(logger)
-
 app.use(cors({ origin: "*" }));
 app.use("/public", express.static("public"));
+
+app.use(logger);
+
 app.use(cookieParser(COOKIE_KEY));
 app.use(session);
 app.use(passportInitialize);
@@ -46,26 +49,17 @@ app.set("view engine", "handlebars");
 
 app.use("/api", apiRouter);
 app.use("/", viewsRouter);
-app.use(errorFn);
-
+app.use(apiErrorHandler);
 
 const httpServer = app.listen(PORT, () => {
-  console.log('🌙 ', `App listening on port ${PORT}`);
-  // console.log('🌙 ', "Path to login view: ", "http://localhost:8080/");
-  // console.log('🌙 ', "Path to Regiter view: ", "http://localhost:8080/register");
-  // console.log('🌙 ',
-  //   "Path to paginate product view: ",
-  //   "http://localhost:8080/products?limit=10&page=1"
-  // );
-  // console.log('🌙 ', "Path to cart view: ", "http://localhost:8080/carts/:cid}");
-  // console.log('🌙 ', "Path to create products: ", "http://localhost:8080/newproducts");
-  // console.log('🌙 ', "Path to API-Products: ", "http://localhost:8080/api/products");
+  winLogger.verbose(`🌙 App listening on port ${PORT}`);
+  winLogger.verbose("🌙 Path to login view: http://localhost:8080/");
 });
 
 export const io = new socketIOServer(httpServer);
 
 io.on("connection", async (clientSocket) => {
-  console.log('🌙 ', `New connection: ${clientSocket.id}`);
+  winLogger.verbose(`New client connection: ${clientSocket.id}`);
   await socketChat(clientSocket);
   await socketFn();
 });

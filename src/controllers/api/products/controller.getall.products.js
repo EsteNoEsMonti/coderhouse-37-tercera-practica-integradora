@@ -1,8 +1,7 @@
-import { productsRepository } from "../../../repositories/product.repository.js";
-import { Uid } from "../../../utils/UiD.js";
-import { mockingProducts, mockingProductsWithFakerJS } from "../../../utils/mockingModule.js";
+import { productsRepository } from "../../../repositories/product.repositorie.js";
 
 export async function getProductsController(req, res, next) {
+  req.logger.http("inside get products")
   try {
     const urlsrt = `http://localhost:8080${req.originalUrl}`;
     const result = await productsRepository.getPaginatedElements(
@@ -11,23 +10,7 @@ export async function getProductsController(req, res, next) {
     );
     res.json(result);
   } catch (error) {
-    next(error);
-  }
-}
-
-export async function getMockingProducts(req, res, next) {
-  try {
-    const { products } = await mockingProducts()
-    res.json(products)
-  } catch (error) {
-    next(error);
-  }
-}
-export async function getMockingProductsWithFakerJS(req, res, next) {
-  try {
-    const { products } = await mockingProductsWithFakerJS()
-    res.json(products)
-  } catch (error) {
+    req.logger.error(`get all products fail ${error.message}`);
     next(error);
   }
 }

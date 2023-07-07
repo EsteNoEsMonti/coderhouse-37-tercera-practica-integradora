@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import { ErrorNotFound } from "../../mid/errors.class";
 
 export default class ProductManager {
   #path;
@@ -37,7 +38,7 @@ export default class ProductManager {
     await this.#loadProducts();
     const finder = this.products.find((c) => c.id === id);
     if (!finder) {
-      throw new Error("Not Found");
+      throw new ErrorNotFound("Product Not Found");
     }
     return finder;
   }
@@ -46,7 +47,7 @@ export default class ProductManager {
     await this.#loadProducts();
     const finder = this.products.find((c) => c.id === id);
     if (!finder) {
-      throw new Error("Not Found");
+      throw new ErrorNotFound("Product Not Found");
     }
     const deleter = this.products.filter((e) => e.id !== id);
     this.products = deleter;
@@ -57,7 +58,7 @@ export default class ProductManager {
     await this.#loadProducts();
     const updindex = this.products.findIndex((e) => e.id === id);
     if (updindex === -1) {
-      throw new Error("Not Found");
+      throw new ErrorNotFound("Product Not Found");
     }
     const oldproduct = this.products[updindex];
     this.products[updindex] = { ...oldproduct, ...productUpd };
